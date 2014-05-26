@@ -1,0 +1,28 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>{% block title %}Ubiwhere{% endblock %}</title>
+
+</head>
+
+<body>
+
+	
+  	<h2>Ubiwhere Application</h2>
+    
+  	<br>
+ 	<table>
+		<tr>
+			<th>Users</th>
+			<th>Musicas</th>
+		</tr>		
+		<tr>
+			<td><a href="{% url 'ubiwhere:user_add' %}"><button>Lista de Users</button></a></td>
+			<td><a href="{% url 'ubiwhere:music_add' %}"><button>Lista de Musicas</button></a></td>
+		</tr>
+	</table>	
+	
+    
+ </body>
+
+</html>

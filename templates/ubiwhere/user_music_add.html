@@ -1,0 +1,41 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>{% block title %}Ubiwhere{% endblock %}</title>
+
+</head>
+
+<body>
+
+	{% if messages %}
+		<div id="messages">
+			<ul>
+			    {% for message in messages %}
+			    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+			    {% endfor %}
+			</ul>
+		</div>
+	{% endif %}
+	<br>
+	<a href="{% url 'ubiwhere:ubiwhere_index' %}"><b>Home</b></a>	
+	<br>
+  <h2>User Music Add</h2>
+          
+    <form action="{% url 'ubiwhere:user_music_add' %}" method="post">
+    	{% csrf_token %}
+        {{ user_music_form.user.label_tag }}
+        {{ user_music_form.user.errors }}
+        {{ user_music_form.user }}
+        <br>
+        {{ user_music_form.music.label_tag }}
+        {{ user_music_form.music.errors }}
+        {{ user_music_form.music }}
+        <br>
+        <button type="submit"> Submeter</button>
+    </form>
+    
+    
+    
+ </body>
+
+</html>

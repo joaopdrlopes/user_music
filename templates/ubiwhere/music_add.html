@@ -1,0 +1,67 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>{% block title %}Ubiwhere{% endblock %}</title>
+
+</head>
+
+<body>
+
+	{% if messages %}
+		<div id="messages">
+			<ul>
+			    {% for message in messages %}
+			    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+			    {% endfor %}
+			</ul>
+		</div>
+	{% endif %}
+	<br>
+		
+	<a href="{% url 'ubiwhere:ubiwhere_index' %}"><b>Home</b></a>	
+	<br>
+  <h2>Music Add</h2>
+          
+    <form action="{% url 'ubiwhere:music_add' %}" method="post">
+    	{% csrf_token %}
+        {{ music_form.artist.label_tag }}
+        {{ music_form.artist.errors }}
+        {{ music_form.artist }}
+        <br>
+        {{ music_form.album.label_tag }}
+        {{ music_form.album.errors }}
+        {{ music_form.album }}
+        <br>
+        {{ music_form.title.label_tag }}
+        {{ music_form.title.errors }}
+        {{ music_form.title }}
+        <br>
+        <button type="submit"> Submeter</button>
+    </form>
+    
+    
+     <br>
+    <h2>List of Musics</h2>
+    {% if musics_obj %}	
+		<table>
+			<tr>
+				<th>Artist</th>
+				<th>Album</th>
+				<th>Title</th>
+				
+			</tr>
+			{% for music in musics_obj %}
+				<tr>
+					<td>{{ music.artist }}</td>
+					<td>{{ music.album }}</td>
+					<td>{{ music.title }}</td>
+				</tr>
+			{% endfor %}
+		</table>	
+	{% else %}
+		<p>No data found.</p>
+	{% endif %}
+    
+ </body>
+
+</html>

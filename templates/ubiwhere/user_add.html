@@ -1,0 +1,59 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>{% block title %}Ubiwhere{% endblock %}</title>
+
+</head>
+
+<body>
+
+	{% if messages %}
+		<div id="messages">
+			<ul>
+			    {% for message in messages %}
+			    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+			    {% endfor %}
+			</ul>
+		</div>
+	{% endif %}
+	<br>
+	<a href="{% url 'ubiwhere:ubiwhere_index' %}"><b>Home</b></a>	
+	<br>
+  	<h2>User Add</h2>
+          
+    <form action="{% url 'ubiwhere:user_add' %}" method="post">
+    	{% csrf_token %}
+        {{ user_form.name.label_tag }}
+        {{ user_form.name.errors }}
+        {{ user_form.name }}
+        <br>
+        {{ user_form.email.label_tag }}
+        {{ user_form.email.errors }}
+        {{ user_form.email }}
+        <br>
+        <button type="submit"> Submeter</button>
+    </form>
+    
+    <br>
+    <h2>List of Users</h2>
+    {% if user_objs %}	
+		<table>
+			<tr>
+				<th>User Name</th>
+				<th>User Email</th>
+				
+			</tr>
+			{% for user in user_objs %}
+				<tr>
+					<td><a href="{% url 'ubiwhere:user_music_view' user.id %}"><b>{{ user.name }}</b></a></td>
+					<td>{{ user.email }}</td>
+				</tr>
+			{% endfor %}
+		</table>	
+	{% else %}
+		<p>No data found.</p>
+	{% endif %}
+    
+ </body>
+
+</html>
